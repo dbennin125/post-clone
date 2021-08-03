@@ -11,14 +11,22 @@ import {
 
 const methods = ['GET', 'POST', 'PUT', 'DELETE'];
 
-const RestForm = ({ isLoading, URL, method, onChange, onSubmit, body }) => (
+export const PostMForm = ({ 
+  isLoading, 
+  URL, 
+  method, 
+  onInputChange,
+  onMethodChange,
+  onBodyChange,
+  onSubmit, 
+  body }) => (
   <>
     <form onSubmit={onSubmit}>
       <Input 
         placeholder="Enter URL here"
         name="url" 
         value={URL} 
-        onChange={onChange}
+        onChange={onInputChange}
       />
       {
         methods.map((m) => {
@@ -32,7 +40,7 @@ const RestForm = ({ isLoading, URL, method, onChange, onSubmit, body }) => (
               id={m} 
               checked={method === m}
               value={m} 
-              onChange={onChange} >
+              onChange={onMethodChange} >
             </Radio>
             <label htmlFor={m}>{m}</label>
           </RadioGroup>;
@@ -43,7 +51,7 @@ const RestForm = ({ isLoading, URL, method, onChange, onSubmit, body }) => (
         ? <Textarea 
           name="body" 
           value={body} 
-          onChange={onChange} 
+          onChange={onBodyChange} 
         />
         : <></>
       } 
@@ -62,13 +70,13 @@ const RestForm = ({ isLoading, URL, method, onChange, onSubmit, body }) => (
   </>
 );
 
-RestForm.propTypes = {
+PostMForm.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   URL: PropTypes.string.isRequired,
   method: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onBodyChange: PropTypes.func.isRequired,
+  onInputChange: PropTypes.func.isRequired,
+  onMethodChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   body: PropTypes.string
 };
-
-export default RestForm;
