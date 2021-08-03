@@ -1,33 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { usePostM } from '../components/hooks/usePostM';
 import { PostMDisplay } from '../components/postM/PostMDisplay';
 import { PostMForm } from '../components/postM/PostMForm';
-import { fetchAPI } from '../services/fetchAPI';
 
 export const PostMContainer = () => {
-  const [url, setUrl] = useState('');
-  const [method, setMethod] = useState('GET');
-  const [body, setBody] = useState(''); 
-  const [isLoading, setIsLoading] = useState(false);
-  const [display, setDisplay] = useState({
-    'idle':'Nothing to display, add a URL!' 
-  });
  
-  const handleSubmit = event => {
-    event.preventDefault();
-    setIsLoading(true);
+  const {
+    url, 
+    setUrl,
+    body,
+    setBody, 
+    method,
+    setMethod,
+    isLoading,
+    handleSubmit,
+    display
+  } = usePostM();
 
-    if(url === '') alert('Please provide a URL');
-  
-    fetchAPI({ url, method, body })
-      .then(display => setDisplay(display))
-      .then(() => {
-        setUrl('');
-        setBody('');
-        setMethod('GET');
-        setIsLoading(false);
-      });
-  };
-  
   return <>
     <PostMForm 
       isLoading={isLoading}
