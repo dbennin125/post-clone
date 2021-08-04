@@ -9,12 +9,18 @@ import {
   Input,
   Stack,
   HStack, 
- 
+  useRadioGroup,
   Center,
  
 } from '@chakra-ui/react';
 
+// import {
+//   SearchIcon
+// } from '@chakra-ui/icons';
+// import RadioCard from '../radio/RadioCard';
+
 const methods = ['GET', 'POST', 'PUT', 'DELETE'];
+
 
 export const PostMForm = ({ 
   isLoading, 
@@ -24,8 +30,17 @@ export const PostMForm = ({
   onMethodChange,
   onBodyChange,
   onSubmit, 
-  body }) => (
-  <>
+  body }) => {
+
+  // const { getRootProps, getRadioProps } = useRadioGroup({ 
+  //   name:'method',
+  //   defaultValue: method,
+  //   onChange: onMethodChange,
+  // });
+
+  // const group = getRootProps();
+  // console.log(method);
+  return <>
     <Center pb={20}>
       <form onSubmit={onSubmit}>
 
@@ -39,9 +54,33 @@ export const PostMForm = ({
               value={URL} 
               w={400}
               onChange={onInputChange}
+              // icon as={SearchIcon}
             />
           </Center>
-          <HStack spacing={10}>
+          <HStack spacing={10} 
+            
+          >
+            {/* {
+              methods.map(m => {
+                const radio = getRadioProps({ m });
+              
+                const trueBool = (m === method);
+                // console.log(trueBool);
+                const button = <RadioCard key={m} 
+                
+                  // onChange={onMethodChange}
+                  // checked={m === method}
+                  value={m} 
+                  isChecked={trueBool}
+                  // onChange={onMethodChange}                  
+                  {...radio}  
+                >
+                  {m}
+                </RadioCard>;
+                return button;
+                
+              })
+            } */}
             {
               methods.map((m) => {
                 return <RadioGroup 
@@ -54,7 +93,7 @@ export const PostMForm = ({
                   <Center>
                     <Radio 
                       w={6}
-                      color="red" 
+                      colorScheme="red" 
                       id={m} 
                       checked={method === m}
                       value={m} 
@@ -81,6 +120,7 @@ export const PostMForm = ({
           <Center>
             <Button 
               isLoading={isLoading}
+              backgroundColor="#e6bcff"
               color="tomato.200" 
               variant="solid"
               loadingText="Submitting"
@@ -94,8 +134,8 @@ export const PostMForm = ({
 
       </form>
     </Center>
-  </>
-);
+  </>;
+};
 
 PostMForm.propTypes = {
   isLoading: PropTypes.bool.isRequired,

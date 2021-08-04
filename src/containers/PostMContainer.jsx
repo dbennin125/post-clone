@@ -24,9 +24,12 @@ export const PostMContainer = () => {
   return <>
     <PostMForm 
       isLoading={isLoading}
-      onInputChange={({ target }) => setUrl(target.value)}
-      onMethodChange={({ target }) => setMethod(target.value)}
-      onBodyChange={({ target }) => setBody(target.value)}
+      onInputChange={({ target }) => 
+        setUrl(target.value)}
+      onMethodChange={({ target }) => 
+        setMethod(target.value)}
+      onBodyChange={({ target }) => 
+        setBody(target.value)}
       URL={url}
       method={method}
       body={body}

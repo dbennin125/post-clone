@@ -7,10 +7,10 @@ import { Center, Box } from '@chakra-ui/react';
 export const PostMDisplay = ({ display }) => {
   return (
     <>
-      <Center w="75wv" maxW="100wv">
-        <Box>
-          <pre style={{ width: '100wv' }}>
-            <ReactJson src={display}  />
+      <Center>
+        <Box  w="50wv" maxW="75vw">
+          <pre>
+            <ReactJson src={display} />
           </pre>
         </Box>
       </Center>

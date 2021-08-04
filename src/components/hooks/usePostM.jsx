@@ -5,7 +5,6 @@ import {
   setInLocalStorage 
 } from '../../utils/localStorageUtils';
 import  swal  from 'sweetalert';
-import { VibeCheck } from '../experience/VibeCheck';
 
 export const usePostM = () => {
 
@@ -45,6 +44,15 @@ export const usePostM = () => {
       });
       return;
     }
+    if(url.includes('local') || url.includes('host')) {
+      swal({ 
+        title: 'Hold up...',
+        icon: 'error', 
+        text: 'Providing a localhost will break this...',
+        button: 'Alright' 
+      });
+      return;
+    }
 
     if(method === 'POST' && !body) {
       swal(noBodyWarning);
@@ -65,7 +73,6 @@ export const usePostM = () => {
         setUrl('');
         setBody('');
         setMethod('GET');
-        VibeCheck();
       });
     
     // eslint-disable-next-line max-len
@@ -79,6 +86,7 @@ export const usePostM = () => {
   
   const handleClick = ({ id }) => {
     const result = history.find(item => item.key === id);
+    setDisplay({ 'fetching':'your old history!'  });
     setBody(result.body);
     setMethod(result.method);
     setUrl(result.url);
