@@ -6,7 +6,12 @@ import {
   Radio,
   Textarea, 
   RadioGroup,
-  Input, 
+  Input,
+  Stack,
+  HStack, 
+ 
+  Center,
+ 
 } from '@chakra-ui/react';
 
 const methods = ['GET', 'POST', 'PUT', 'DELETE'];
@@ -21,52 +26,74 @@ export const PostMForm = ({
   onSubmit, 
   body }) => (
   <>
-    <form onSubmit={onSubmit}>
-      <Input 
-        placeholder="Enter URL here"
-        name="url" 
-        value={URL} 
-        onChange={onInputChange}
-      />
-      {
-        methods.map((m) => {
-          return <RadioGroup 
-            name="method" 
-            defaultChecked={method} 
-            value={method}  
-            key={m}>
-            <Radio 
-              color="red" 
-              id={m} 
-              checked={method === m}
-              value={m} 
-              onChange={onMethodChange} >
-            </Radio>
-            <label htmlFor={m}>{m}</label>
-          </RadioGroup>;
-        })
-      }
-     
-      { method.includes('P') 
-        ? <Textarea 
-          name="body" 
-          value={body} 
-          onChange={onBodyChange} 
-        />
-        : <></>
-      } 
+    <Center pb={20}>
+      <form onSubmit={onSubmit}>
 
-      <Button 
-        isLoading={isLoading}
-        color="tomato.200" 
-        variant="solid"
-        loadingText="Submitting"
-        type="submit"
-      >
+        <Stack spacing={10}>
+          <Center>
+            <Input 
+              variant="flushed"
+              placeholder="Enter URL here"
+              type="url"
+              name="url" 
+              value={URL} 
+              w={400}
+              onChange={onInputChange}
+            />
+          </Center>
+          <HStack spacing={10}>
+            {
+              methods.map((m) => {
+                return <RadioGroup 
+                  name="method" 
+                  defaultChecked={method} 
+                  value={method}  
+                  key={m}
+                
+                >
+                  <Center>
+                    <Radio 
+                      w={6}
+                      color="red" 
+                      id={m} 
+                      checked={method === m}
+                      value={m} 
+                      onChange={onMethodChange} 
+                    >
+                    </Radio>
+                    <label htmlFor={m}>{m}</label>
+                  </Center>
+                </RadioGroup>;
+           
+                
+              })
+            }
+          </HStack>
+          { method.includes('P') 
+            ? <Textarea 
+              name="body" 
+              value={body} 
+              onChange={onBodyChange} 
+              w={400}
+            />
+            : <></>
+          } 
+          <Center>
+            <Button 
+              isLoading={isLoading}
+              color="tomato.200" 
+              variant="solid"
+              loadingText="Submitting"
+              type="submit"
+              maxW={200}
+            >
         Submit button
-      </Button>
+            </Button>
+          </Center>
+        </Stack>
 
-    </form>
+      </form>
+    </Center>
   </>
 );
 

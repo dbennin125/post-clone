@@ -4,8 +4,18 @@ import {
   getFromLocalStorage, 
   setInLocalStorage 
 } from '../../utils/localStorageUtils';
+import  swal  from 'sweetalert';
+import { VibeCheck } from '../experience/VibeCheck';
 
 export const usePostM = () => {
+
+  const noBodyWarning = {
+    title: 'Wait a minute!',
+    icon: 'warning',
+    text: 'Please include a body',
+    button: 'Got it!'
+  };
+
   const [url, setUrl] = useState('');
   const [method, setMethod] = useState('GET');
   const [body, setBody] = useState(''); 
@@ -26,8 +36,26 @@ export const usePostM = () => {
     event.preventDefault();
     const key = `${url}+${method}+${body}`;
     
-    if(url === '') alert('Please provide a URL');
-    if(url === '') return;
+    if(url === '') {
+      swal({ 
+        title: 'Hold up...',
+        icon: 'error', 
+        text: 'Please provide a URL',
+        button: 'Cool!' 
+      });
+      return;
+    }
+
+    if(method === 'POST' && !body) {
+      swal(noBodyWarning);
+      return;
+    }
+
+    if(method === 'PUT' && !body) {
+      swal(noBodyWarning);
+      return;
+    }
+  
     
     setIsLoading(true);
     fetchAPI({ url, method, body })
@@ -37,6 +65,7 @@ export const usePostM = () => {
         setUrl('');
         setBody('');
         setMethod('GET');
+        VibeCheck();
       });
     
     // eslint-disable-next-line max-len
@@ -46,13 +75,10 @@ export const usePostM = () => {
       setInLocalStorage([...h, { url, method, body, key }]);
       return  [...h, { url, method, body, key }]; 
     });
-
-
   };
   
   const handleClick = ({ id }) => {
     const result = history.find(item => item.key === id);
-
     setBody(result.body);
     setMethod(result.method);
     setUrl(result.url);
