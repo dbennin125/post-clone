@@ -58,8 +58,8 @@ export const PostMForm = ({
 
       <Button 
         isLoading={isLoading}
-        color="teal.200" 
-        variant="ghost"
+        color="tomato.200" 
+        variant="solid"
         loadingText="Submitting"
         type="submit"
       >

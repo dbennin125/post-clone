@@ -1,4 +1,5 @@
 import React from 'react';
+import { HistoryList } from '../components/history/HistoryList';
 import { usePostM } from '../components/hooks/usePostM';
 import { PostMDisplay } from '../components/postM/PostMDisplay';
 import { PostMForm } from '../components/postM/PostMForm';
@@ -14,7 +15,10 @@ export const PostMContainer = () => {
     setMethod,
     isLoading,
     handleSubmit,
-    display
+    display,
+    history, 
+    handleClick
+  
   } = usePostM();
 
   return <>
@@ -30,5 +34,8 @@ export const PostMContainer = () => {
 
     />
     <PostMDisplay display={display} />
+    <HistoryList history={history} 
+      onClick={({ target }) => 
+        handleClick(target)}/>
   </>;
 };
