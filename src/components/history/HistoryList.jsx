@@ -2,16 +2,24 @@ import React from 'react';
 import { HistoryItem } from './HistoryItem';
 import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
-
+import { VStack } from '@chakra-ui/react';
 
 export const HistoryList = ({ history, onClick }) => {
   const historyElement = history.map((h) => (
-    <li key={`${uuidv4()}`} onClick={onClick}>
+    <li onClick={onClick} key={`${uuidv4()}`}> 
       <HistoryItem id={h.key} url={h.url} method={h.method} />
     </li>
   ));
   
-  return <ul>{historyElement}</ul>;
+  return <ul>
+    <VStack 
+      w="75%" 
+      spacing={3} 
+      pt="10%"
+    >
+      {historyElement}
+    </VStack> 
+  </ul>;
 };
 
 HistoryList.propTypes = {

@@ -93,7 +93,7 @@ export const PostMForm = ({
                   <Center>
                     <Radio 
                       w={6}
-                      colorScheme="red" 
+                      colorScheme="blackAlpha" 
                       id={m} 
                       checked={method === m}
                       value={m} 
@@ -109,10 +109,17 @@ export const PostMForm = ({
             }
           </HStack>
           { method.includes('P') 
+
             ? <Textarea 
               name="body" 
               value={body} 
-              onChange={onBodyChange} 
+              onChange={onBodyChange}
+              placeholder={`Please use valid JSON
+Example: 
+{
+  "key": "value"
+}`}
+              height={40} 
               w={400}
             />
             : <></>
@@ -120,12 +127,13 @@ export const PostMForm = ({
           <Center>
             <Button 
               isLoading={isLoading}
-              backgroundColor="#e6bcff"
-              color="tomato.200" 
+              backgroundColor="#ffa63a"
+              color="#4e3aff" 
               variant="solid"
               loadingText="Submitting"
               type="submit"
               maxW={200}
+              shadow=".75px .75px .5px .25px grey"
             >
         Submit button
             </Button>

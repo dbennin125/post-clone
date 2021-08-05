@@ -15,6 +15,7 @@ export const usePostM = () => {
     button: 'Got it!'
   };
 
+
   const [url, setUrl] = useState('');
   const [method, setMethod] = useState('GET');
   const [body, setBody] = useState(''); 
@@ -23,8 +24,6 @@ export const usePostM = () => {
     'idle':'Nothing to display, add a URL!' 
   });
   const [history, setHistory] = useState([]);
- 
-
  
   useEffect(() => {
     const localHistory = getFromLocalStorage();
@@ -84,12 +83,49 @@ export const usePostM = () => {
     });
   };
   
-  const handleClick = ({ id }) => {
+  const handleClick = async ({ id }) => {
     const result = history.find(item => item.key === id);
+    
     setDisplay({ 'fetching':'your old history!'  });
-    setBody(result.body);
-    setMethod(result.method);
+    setBody(result.body),
+    setMethod(result.method),
     setUrl(result.url);
+    
+    if(result.url === '') {
+      swal({ 
+        title: 'Hold up...',
+        icon: 'error', 
+        text: 'Please provide a URL',
+        button: 'Cool!' 
+      });
+      return;
+    }
+    if(result.url.includes('local') || result.url.includes('host')) {
+      swal({ 
+        title: 'Hold up...',
+        icon: 'error', 
+        text: 'Providing a localhost will break this...',
+        button: 'Alright' 
+      });
+      return;
+    }
+
+    if(result.method === 'POST' && !result.body) {
+      swal(noBodyWarning);
+      return;
+    }
+
+    if(result.method === 'PUT' && !result.body) {
+      swal(noBodyWarning);
+      return;
+    }
+
+    setIsLoading(true);
+    fetchAPI({ ...result })
+      .then(display => setDisplay(display))
+      .then(() => {
+        setIsLoading(false);
+      });
   };
 
   return {
