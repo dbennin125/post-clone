@@ -124,6 +124,18 @@ export const usePostM = () => {
       });
   };
 
+  const handleDelete = async ({ id }) => {
+    const result = history.filter((item) => item.key !== id);
+    setDisplay({ fetching: 'deleting old history!' });
+    setUrl('');
+    setBody('');
+    setMethod('GET');
+    setHistory(() => {
+      setInLocalStorage([...result]);
+      return [...result];
+    });
+  };
+
   return {
     url,
     setUrl,
@@ -136,5 +148,6 @@ export const usePostM = () => {
     handleSubmit,
     history,
     handleClick,
+    handleDelete,
   };
 };

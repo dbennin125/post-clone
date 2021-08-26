@@ -19,6 +19,7 @@ export const PostMContainer = () => {
     display,
     history,
     handleClick,
+    handleDelete,
   } = usePostM();
 
   return (
@@ -32,7 +33,6 @@ export const PostMContainer = () => {
         gap={1}
       >
         <GridItem
-          maxW="inherit"
           colSpan={7}
           backgroundColor="#3ad4ff"
           boxShadow="xl"
@@ -41,8 +41,6 @@ export const PostMContainer = () => {
           <Header />
         </GridItem>
         <GridItem
-          w="full"
-          // maxW="inherit"
           rowSpan={6}
           colSpan={2}
           bg="#ff9061"
@@ -50,6 +48,7 @@ export const PostMContainer = () => {
           boxShadow="2xl"
         >
           <HistoryList
+            handleDelete={({ target }) => handleDelete(target)}
             history={history}
             onClick={({ target }) => handleClick(target)}
           />
@@ -59,7 +58,6 @@ export const PostMContainer = () => {
           rowSpan={5}
           area="body"
           overflow="auto"
-          w="full"
           pt="8rem"
           h="full"
         >
