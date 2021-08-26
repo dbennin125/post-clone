@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { 
+import {
   Button,
   Radio,
-  Textarea, 
+  Textarea,
   RadioGroup,
   Input,
   Stack,
-  HStack, 
-  useRadioGroup,
+  HStack,
+  // useRadioGroup,
   Center,
- 
 } from '@chakra-ui/react';
 
 // import {
@@ -21,18 +20,17 @@ import {
 
 const methods = ['GET', 'POST', 'PUT', 'DELETE'];
 
-
-export const PostMForm = ({ 
-  isLoading, 
-  URL, 
-  method, 
+export const PostMForm = ({
+  isLoading,
+  URL,
+  method,
   onInputChange,
   onMethodChange,
   onBodyChange,
-  onSubmit, 
-  body }) => {
-
-  // const { getRootProps, getRadioProps } = useRadioGroup({ 
+  onSubmit,
+  body,
+}) => {
+  // const { getRootProps, getRadioProps } = useRadioGroup({
   //   name:'method',
   //   defaultValue: method,
   //   onChange: onMethodChange,
@@ -40,27 +38,23 @@ export const PostMForm = ({
 
   // const group = getRootProps();
   // console.log(method);
-  return <>
-    <Center pb={20}>
-      <form onSubmit={onSubmit}>
-
-        <Stack spacing={10}>
-          <Center>
-            <Input 
+  return (
+    <>
+      <Center pb={8} w="full" textOverflow="auto">
+        <form onSubmit={onSubmit}>
+          <Stack spacing={10} w="full">
+            <Input
               variant="flushed"
               placeholder="Enter URL here"
               type="url"
-              name="url" 
-              value={URL} 
-              w={400}
+              name="url"
+              value={URL}
               onChange={onInputChange}
               // icon as={SearchIcon}
             />
-          </Center>
-          <HStack spacing={10} 
-            
-          >
-            {/* {
+
+            <HStack w="fit-content" spacing={10}>
+              {/* {
               methods.map(m => {
                 const radio = getRadioProps({ m });
               
@@ -81,68 +75,68 @@ export const PostMForm = ({
                 
               })
             } */}
-            {
-              methods.map((m) => {
-                return <RadioGroup 
-                  name="method" 
-                  defaultChecked={method} 
-                  value={method}  
-                  key={m}
-                
-                >
-                  <Center>
-                    <Radio 
-                      w={6}
-                      colorScheme="blackAlpha" 
-                      id={m} 
-                      checked={method === m}
-                      value={m} 
-                      onChange={onMethodChange} 
-                    >
-                    </Radio>
-                    <label htmlFor={m}>{m}</label>
-                  </Center>
-                </RadioGroup>;
-           
-                
-              })
-            }
-          </HStack>
-          { method.includes('P') 
-
-            ? <Textarea 
-              name="body" 
-              value={body} 
-              onChange={onBodyChange}
-              placeholder={`Please use valid JSON
+              {methods.map((m) => {
+                return (
+                  <RadioGroup
+                    name="method"
+                    defaultChecked={method}
+                    value={method}
+                    key={m}
+                  >
+                    <Center>
+                      <Radio
+                        w={6}
+                        colorScheme="blackAlpha"
+                        id={m}
+                        isChecked={method === m}
+                        value={m}
+                        onChange={onMethodChange}
+                      ></Radio>
+                      <label htmlFor={m}>{m}</label>
+                    </Center>
+                  </RadioGroup>
+                );
+              })}
+            </HStack>
+            {method.includes('P') ? (
+              <Textarea
+                w="full"
+                name="body"
+                value={body}
+                onChange={onBodyChange}
+                placeholder={`Please use valid JSON
 Example: 
 {
   "key": "value"
 }`}
-              height={40} 
-              w={400}
-            />
-            : <></>
-          } 
-          <Center>
-            <Button 
-              isLoading={isLoading}
-              backgroundColor="#ffa63a"
-              color="#4e3aff" 
-              variant="solid"
-              loadingText="Submitting"
-              type="submit"
-              maxW={200}
-              shadow=".75px .75px .5px .25px grey"
-            >
-        Submit button
-            </Button>
-          </Center>
-        </Stack>
-
-      </form>
-    </Center>
-  </>;
+                height={40}
+              />
+            ) : (
+              <></>
+            )}
+            <Center>
+              <Button
+                isLoading={isLoading}
+                backgroundColor="#ffa63a"
+                color="#4e3aff"
+                variant="solid"
+                loadingText="Submitting"
+                type="submit"
+                maxW={200}
+                shadow=".25rem .25rem .25rem grey"
+                _hover={{
+                  background: '#4e3aff',
+                  color: '#ffa63a',
+                }}
+              >
+                Submit button
+              </Button>
+            </Center>
+          </Stack>
+        </form>
+      </Center>
+    </>
+  );
 };
 
 PostMForm.propTypes = {
@@ -153,5 +147,5 @@ PostMForm.propTypes = {
   onInputChange: PropTypes.func.isRequired,
   onMethodChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  body: PropTypes.string
+  body: PropTypes.string,
 };

@@ -2,22 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ReactJson from 'react-json-view';
-import { Center, Box } from '@chakra-ui/react';
+import { Flex, Box } from '@chakra-ui/react';
 
 export const PostMDisplay = ({ display }) => {
   return (
     <>
-      <Center>
-        <Box  w="50wv" maxW="75vw">
-          <pre>
-            <ReactJson src={display} />
-          </pre>
+      <Flex direction="column" align="center" textOverflow="auto">
+        <Box maxW="100%">
+          <ReactJson
+            quotesOnKeys={false}
+            theme="shapeshifter:inverted"
+            src={display}
+          />
         </Box>
-      </Center>
+      </Flex>
     </>
   );
 };
 
 PostMDisplay.propTypes = {
-  display: PropTypes.any.isRequired
+  display: PropTypes.any.isRequired,
 };

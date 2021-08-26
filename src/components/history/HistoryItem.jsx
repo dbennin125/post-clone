@@ -1,29 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Center, VStack, Text } from '@chakra-ui/react';
+import { VStack, Text } from '@chakra-ui/react';
 
 export const HistoryItem = ({ id, url, method }) => (
-  <Center>
-    <VStack cursor="pointer" id={id} spacing={2}>
-      <Text id={id} 
-        size={2}
-        align="center" 
-        color="#4e3aff" 
-        textShadow="md">
-        {url}
-      </Text>
-      <Text id={id} 
-        align="center" 
-        color="#ffa63a" 
-        textShadow="md">
-        {method}
-      </Text>
-    </VStack>
-  </Center>
+  <VStack
+    spacing={3}
+    pt=".75rem"
+    pb="1rem"
+    cursor="pointer"
+    w="full"
+    id={id}
+    flexShrink={0}
+    boxShadow="md"
+    p={2}
+  >
+    <Text
+      id={id}
+      align="center"
+      color="#ffdf61"
+      textShadow=".1rem .1rem .05rem #c061ff"
+    >
+      {method}
+    </Text>
+    <Text
+      maxW="full"
+      id={id}
+      fontSize={['xs', 'md']}
+      align="center"
+      color="#ffdf61"
+      textShadow=".1rem .1rem .05rem #c061ff"
+    >
+      {url}
+    </Text>
+  </VStack>
 );
 
 HistoryItem.propTypes = {
   id: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
-  method: PropTypes.string.isRequired
+  method: PropTypes.string.isRequired,
 };
