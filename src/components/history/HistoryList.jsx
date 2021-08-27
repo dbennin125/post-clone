@@ -1,12 +1,19 @@
 import React from 'react';
 import { HistoryItem } from './HistoryItem';
-import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
-import { VStack, Center, UnorderedList, List } from '@chakra-ui/react';
+import {
+  VStack,
+  Center,
+  UnorderedList,
+  List,
+  Button,
+  HStack,
+  Flex,
+} from '@chakra-ui/react';
 
 export const HistoryList = ({ history, onClick, handleDelete }) => {
   const historyElement = history.map((h) => (
-    <List size="sm" key={`${uuidv4()}`}>
+    <List size="sm" key={`${h.key}`}>
       <HistoryItem
         id={h.key}
         url={h.url}

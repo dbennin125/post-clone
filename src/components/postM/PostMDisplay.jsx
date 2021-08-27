@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 import ReactJson from 'react-json-view';
 import { Flex, Box } from '@chakra-ui/react';
 
-export const PostMDisplay = ({ display }) => {
+export const PostMDisplay = ({ display, setDisplay }) => {
+  if (!display)
+    setDisplay({
+      working: 'Almost done!',
+    });
   return (
     <>
       <Flex direction="column" align="center" textOverflow="auto">
@@ -22,4 +26,5 @@ export const PostMDisplay = ({ display }) => {
 
 PostMDisplay.propTypes = {
   display: PropTypes.any.isRequired,
+  setDisplay: PropTypes.func.isRequired,
 };

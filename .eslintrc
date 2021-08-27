@@ -50,9 +50,9 @@
           "for": {
             "after": false
           },
-          "if": {
-            "after": false
-          },
+          // "if": {
+          //   "after": false
+          // },
           "switch": {
             "after": false
           },

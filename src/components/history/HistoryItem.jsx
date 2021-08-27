@@ -1,59 +1,62 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { VStack, Text, Button, HStack } from '@chakra-ui/react';
+import {
+  VStack,
+  Text,
+  Button,
+  HStack,
+  Flex,
+  Box,
+  Center,
+  Stack,
+} from '@chakra-ui/react';
 import { DeleteIcon } from '@chakra-ui/icons';
 
 export const HistoryItem = ({ id, url, method, handleDelete, onClick }) => {
-  const DeleteButton = (props) => {
-    return (
-      <Button
-        _hover={{
-          background: '#3AD4FF',
-        }}
-        h={['1rem', '1rem', '1em']}
-        w="auto"
-        bg="transparent"
-        as={DeleteIcon}
-        {...props}
-      />
-    );
-  };
-
   return (
-    <>
-      <HStack w="full" id={id} flexShrink={0}>
-        <DeleteButton cursor="pointer" id={id} onClick={handleDelete} />
-
-        <VStack
-          spacing={3}
-          cursor="pointer"
-          boxShadow="md"
-          p={1}
-          onClick={onClick}
-          pt=".75rem"
-          minW="xs"
+    <Box p={2} boxShadow="md" pb="1rem">
+      <Box
+        // border="red solid 20px"
+        p={2}
+        id={id}
+        onClick={onClick}
+        cursor="pointer"
+      >
+        <Text
+          id={id}
+          color="#ffdf61"
+          align="center"
+          textShadow=".1rem .1rem .05rem #c061ff"
         >
-          <Text
-            id={id}
-            align="center"
-            color="#ffdf61"
-            textShadow=".1rem .1rem .05rem #c061ff"
-          >
-            {method}
-          </Text>
-          <Text
-            id={id}
-            fontSize={['xs', 'md']}
-            align="center"
-            color="#ffdf61"
-            textShadow=".1rem .1rem .05rem #c061ff"
-            pb="1rem"
-          >
-            {url}
-          </Text>
-        </VStack>
-      </HStack>
-    </>
+          {method}
+        </Text>
+
+        <Text
+          flexWrap="wrap"
+          id={id}
+          fontSize={['xs', 'md']}
+          align="center"
+          color="#ffdf61"
+          textShadow=".1rem .1rem .05rem #c061ff"
+        >
+          {url}
+        </Text>
+      </Box>
+      <Center>
+        <Button
+          bg="#3AD4FF"
+          rounded="2xl"
+          h="2.5rem"
+          w="85%"
+          boxShadow="md"
+          cursor="pointer"
+          id={id}
+          onClick={handleDelete}
+        >
+          Delete
+        </Button>
+      </Center>
+    </Box>
   );
 };
 HistoryItem.propTypes = {

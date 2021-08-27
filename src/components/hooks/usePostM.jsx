@@ -5,6 +5,7 @@ import {
   setInLocalStorage,
 } from '../../utils/localStorageUtils';
 import swal from 'sweetalert';
+import { v4 as uuidv4 } from 'uuid';
 
 export const usePostM = () => {
   const noBodyWarning = {
@@ -26,11 +27,17 @@ export const usePostM = () => {
   useEffect(() => {
     const localHistory = getFromLocalStorage();
     if (localHistory) setHistory(localHistory);
-  }, []);
+    else setHistory(history);
+  }, [display]);
+
+  // useEffect(() => {
+  //   setHistory(history);
+  // }, [display]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const key = `${url}+${method}+${body}`;
+    // const key = `${url}+${method}+${body}`;
+    const key = uuidv4();
 
     if (url === '') {
       swal({
@@ -124,15 +131,10 @@ export const usePostM = () => {
       });
   };
 
-  const handleDelete = async ({ id }) => {
-    const result = history.filter((item) => item.key !== id);
-    setDisplay({ fetching: 'deleting old history!' });
-    setUrl('');
-    setBody('');
-    setMethod('GET');
-    setHistory(() => {
-      setInLocalStorage([...result]);
-      return [...result];
+  const handleDelete = ({ id }) => {
+    setHistory((prev) => {
+      setInLocalStorage(prev.filter((item) => item.key !== id));
+      return prev.filter((item) => item.key !== id);
     });
   };
 
@@ -149,5 +151,6 @@ export const usePostM = () => {
     history,
     handleClick,
     handleDelete,
+    setDisplay,
   };
 };

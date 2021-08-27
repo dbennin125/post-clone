@@ -20,14 +20,17 @@ export const PostMContainer = () => {
     history,
     handleClick,
     handleDelete,
+    setDisplay,
   } = usePostM();
 
   return (
     <>
       <Grid
         h="100vh"
+        maxH="full"
         maxW="full"
         w="100vw"
+        minW="auto"
         templateRows="repeat(6, 1fr)"
         templateColumns="repeat(9, 1fr)"
         gap={1}
@@ -44,8 +47,11 @@ export const PostMContainer = () => {
           rowSpan={6}
           colSpan={2}
           bg="#ff9061"
-          overflow="auto"
+          w="full"
+          // overflow="auto"
           boxShadow="2xl"
+          // minW="auto"
+          overflowY="auto"
         >
           <HistoryList
             handleDelete={({ target }) => handleDelete(target)}
@@ -74,7 +80,7 @@ export const PostMContainer = () => {
                 onSubmit={handleSubmit}
               />
 
-              <PostMDisplay display={display} />
+              <PostMDisplay display={display} setDisplay={setDisplay} />
             </VStack>
           </Center>
         </GridItem>
