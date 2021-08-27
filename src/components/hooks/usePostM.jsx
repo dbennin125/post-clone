@@ -77,7 +77,7 @@ export const usePostM = () => {
     // eslint-disable-next-line max-len
     if (history.filter((item) => item.key === key).length > 0 || method === '')
       return;
-
+    //update history and local storage
     setHistory((h) => {
       setInLocalStorage([...h, { url, method, body, key }]);
       return [...h, { url, method, body, key }];

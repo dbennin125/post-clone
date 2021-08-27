@@ -2,16 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ReactJson from 'react-json-view';
-import { Flex, Box } from '@chakra-ui/react';
+import { Box, Center } from '@chakra-ui/react';
 
 export const PostMDisplay = ({ display, setDisplay }) => {
   if (!display)
     setDisplay({
-      working: 'Almost done!',
+      error: 'Something went wrong! Try again...',
     });
   return (
     <>
-      <Flex direction="column" align="center" textOverflow="auto">
+      <Center>
         <Box maxW="100%">
           <ReactJson
             quotesOnKeys={false}
@@ -19,7 +19,7 @@ export const PostMDisplay = ({ display, setDisplay }) => {
             src={display}
           />
         </Box>
-      </Flex>
+      </Center>
     </>
   );
 };

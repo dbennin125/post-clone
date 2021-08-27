@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import {
   Button,
   Radio,
@@ -9,14 +8,8 @@ import {
   Input,
   Stack,
   HStack,
-  // useRadioGroup,
   Center,
 } from '@chakra-ui/react';
-
-// import {
-//   SearchIcon
-// } from '@chakra-ui/icons';
-// import RadioCard from '../radio/RadioCard';
 
 const methods = ['GET', 'POST', 'PUT', 'DELETE'];
 
@@ -30,14 +23,6 @@ export const PostMForm = ({
   onSubmit,
   body,
 }) => {
-  // const { getRootProps, getRadioProps } = useRadioGroup({
-  //   name:'method',
-  //   defaultValue: method,
-  //   onChange: onMethodChange,
-  // });
-
-  // const group = getRootProps();
-  // console.log(method);
   return (
     <>
       <Center pb={8} w="full" textOverflow="auto">
@@ -50,31 +35,9 @@ export const PostMForm = ({
               name="url"
               value={URL}
               onChange={onInputChange}
-              // icon as={SearchIcon}
             />
 
             <HStack w="fit-content" spacing={10}>
-              {/* {
-              methods.map(m => {
-                const radio = getRadioProps({ m });
-              
-                const trueBool = (m === method);
-                // console.log(trueBool);
-                const button = <RadioCard key={m} 
-                
-                  // onChange={onMethodChange}
-                  // checked={m === method}
-                  value={m} 
-                  isChecked={trueBool}
-                  // onChange={onMethodChange}                  
-                  {...radio}  
-                >
-                  {m}
-                </RadioCard>;
-                return button;
-                
-              })
-            } */}
               {methods.map((m) => {
                 return (
                   <RadioGroup

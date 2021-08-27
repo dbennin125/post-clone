@@ -48,9 +48,7 @@ export const PostMContainer = () => {
           colSpan={2}
           bg="#ff9061"
           w="full"
-          // overflow="auto"
           boxShadow="2xl"
-          // minW="auto"
           overflowY="auto"
         >
           <HistoryList
@@ -79,7 +77,6 @@ export const PostMContainer = () => {
                 body={body}
                 onSubmit={handleSubmit}
               />
-
               <PostMDisplay display={display} setDisplay={setDisplay} />
             </VStack>
           </Center>
