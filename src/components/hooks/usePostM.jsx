@@ -5,7 +5,6 @@ import {
   setInLocalStorage,
 } from '../../utils/localStorageUtils';
 import swal from 'sweetalert';
-import { v4 as uuidv4 } from 'uuid';
 
 export const usePostM = () => {
   const noBodyWarning = {
@@ -15,6 +14,7 @@ export const usePostM = () => {
     button: 'Got it!',
   };
 
+  //initialize state
   const [url, setUrl] = useState('');
   const [method, setMethod] = useState('GET');
   const [body, setBody] = useState('');
@@ -30,14 +30,10 @@ export const usePostM = () => {
     else setHistory(history);
   }, [display]);
 
-  // useEffect(() => {
-  //   setHistory(history);
-  // }, [display]);
-
+  //submit request
   const handleSubmit = (event) => {
     event.preventDefault();
-    // const key = `${url}+${method}+${body}`;
-    const key = uuidv4();
+    const key = `${url}+${method}+${body}`;
 
     if (url === '') {
       swal({
@@ -88,6 +84,7 @@ export const usePostM = () => {
     });
   };
 
+  //render from history
   const handleClick = async ({ id }) => {
     const result = history.find((item) => item.key === id);
 
@@ -131,6 +128,7 @@ export const usePostM = () => {
       });
   };
 
+  //delete from state and update localStorage
   const handleDelete = ({ id }) => {
     setHistory((prev) => {
       setInLocalStorage(prev.filter((item) => item.key !== id));
