@@ -63,12 +63,16 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^1.0.15",
     "@chakra-ui/react": "^1.6.5",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
+    "@sweetalert/with-react": "^0.1.1",
     "framer-motion": "^4.1.17",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-json-view": "^1.21.3"
+    "react-json-view": "^1.21.3",
+    "sweetalert": "^2.1.2",
+    "uuid": "^3.4.0"
   }
 }
